@@ -37,7 +37,9 @@ class WebFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        binding.webview.webViewClient = MyWebViewClient(viewModel)
+        binding.webview.webViewClient = MyWebViewClient(onUrlChanged = { newUrl ->
+            viewModel.onPageLoad(newUrl)
+        })
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.url.collectLatest { url ->

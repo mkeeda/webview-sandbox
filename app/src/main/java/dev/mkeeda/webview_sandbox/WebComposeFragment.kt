@@ -1,7 +1,7 @@
 package dev.mkeeda.webview_sandbox
 
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,31 +10,43 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 class WebComposeFragment : Fragment() {
+    private val viewModel: WebViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = ComposeView(requireContext()).apply {
         setContent {
-            WebScreen()
+            val url by viewModel.url.collectAsStateWithLifecycle()
+
+            WebScreen(
+                url = url,
+                onUrlChanged = { newUrl ->
+                    viewModel.onPageLoad(newUrl)
+                }
+            )
         }
     }
 }
 
 @Composable
-fun WebScreen(viewModel: WebViewModel = WebViewModel()) {
-    val url by viewModel.url.collectAsStateWithLifecycle()
-
+fun WebScreen(
+    url: Uri,
+    onUrlChanged: (Uri) -> Unit
+) {
     AndroidView(
         factory = { context ->
             WebView(context).apply {
-                webViewClient = MyWebViewClient(viewModel)
+                webViewClient = MyWebViewClient(onUrlChanged)
             }
         },
-        update = { view ->
-            view.loadUrl(url.toString())
+        update = { webView ->
+            webView.loadUrl(url.toString())
         }
     )
 }
