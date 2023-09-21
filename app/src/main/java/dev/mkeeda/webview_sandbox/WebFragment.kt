@@ -34,7 +34,7 @@ class WebFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_WebFragment_to_WebComposeFragment)
         }
 
         binding.webview.webViewClient = MyWebViewClient(onUrlChanged = { newUrl ->

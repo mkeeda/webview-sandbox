@@ -3,26 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/WebFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/WebFragment"
         android:name="dev.mkeeda.webview_sandbox.WebFragment"
         android:label="@string/web_fragment_label"
         tools:layout="@layout/fragment_web">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_WebFragment_to_WebComposeFragment"
+            app:destination="@id/WebComposeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/WebComposeFragment"
         android:name="dev.mkeeda.webview_sandbox.WebComposeFragment"
-        android:label="@string/web_compose_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+        android:label="@string/web_compose_fragment_label">
     </fragment>
 </navigation>
