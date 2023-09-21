@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="dev.mkeeda.webview_sandbox.WebFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/web_fragment_label"
         tools:layout="@layout/fragment_web">
 
         <action
@@ -17,8 +17,8 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="dev.mkeeda.webview_sandbox.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:name="dev.mkeeda.webview_sandbox.WebComposeFragment"
+        android:label="@string/web_compose_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
